@@ -27,5 +27,5 @@ const bootstrap = async () => {
 };
 
 bootstrap().then((port: number) => {
-  Logger.log(`Application running on port: ${port}`, 'Main');
+  Logger.log(` 🌍 Application running on port: ${port}`, 'Main');
 });
