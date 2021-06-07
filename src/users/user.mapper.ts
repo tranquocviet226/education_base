@@ -1,3 +1,5 @@
+import { PermissionMapper } from 'src/permissions/permission.mapper';
+import { RoleMapper } from 'src/roles/role.mapper';
 import { PermissionEntity } from '../permissions/permission.entity';
 import { RoleEntity } from '../roles/role.entity';
 import { CreateUserRequestDto, UserResponseDto } from './dtos';
@@ -14,6 +16,26 @@ export class UserMapper {
     dto.lastName = entity.lastName;
     dto.status = entity.status;
     dto.isSuperUser = entity.isSuperUser;
+    return dto;
+  }
+
+  public static async toDtoWithRelations(
+    entity: UserEntity,
+  ): Promise<UserResponseDto> {
+    const dto = new UserResponseDto();
+
+    dto.id = entity.id;
+    dto.username = entity.username;
+    dto.firstName = entity.firstName;
+    dto.lastName = entity.lastName;
+    dto.permissions = await Promise.all(
+      (await entity.permissions).map(PermissionMapper.toDto),
+    );
+    dto.roles = await Promise.all(
+      (await entity.roles).map(RoleMapper.toDtoWithRelations),
+    );
+    dto.isSuperUser = entity.isSuperUser;
+    dto.status = entity.status;
     return dto;
   }
 

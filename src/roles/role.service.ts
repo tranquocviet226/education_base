@@ -34,7 +34,6 @@ export class RolesService {
       roleEntity = await this.rolesRepository.save(roleEntity);
       return RoleMapper.toDto(roleEntity);
     } catch (error) {
-      console.log('err role', error);
       if (error.code == DBErrorCode.PgUniqueConstraintViolation) {
         throw new RoleExistsException(roleDto.name);
       }

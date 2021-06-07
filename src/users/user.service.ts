@@ -38,7 +38,6 @@ export class UserService {
       userEntity = await this.usersRepository.save(userEntity);
       return UserMapper.toDto(userEntity);
     } catch (error) {
-      console.log('err', error);
       if (error.code == DBErrorCode.PgUniqueConstraintViolation) {
         throw new UserExistsException(userDto.username);
       }
