@@ -2,7 +2,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { INestApplication } from '@nestjs/common';
 import { AUTH_OPTIONS, TOKEN_NAME } from '@auth';
 
-const title = 'Nestjs Framework';
+const title = 'Education Api Swagger';
 const description = 'Education app';
 const version = '1.0';
 
